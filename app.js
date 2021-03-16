@@ -12,6 +12,8 @@ const rfs = require('rotating-file-stream');
 const { isCelebrate } = require('celebrate');
 const cookieParser = require('cookie-parser');
 
+const config = require('./config');
+
 const authRoutes = require('./auth/api');
 
 /**
@@ -81,9 +83,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   const status = isCelebrate(err) ? 400 : err.status || 500;
   const message =
-    process.env.NODE_ENV === 'production' && err.status === 500
-      ? 'Something Went Wrong!'
-      : err.message;
+    config.env === 'production' && err.status === 500 ? 'Something Went Wrong!' : err.message;
 
   // eslint-disable-next-line no-console
   if (status === 500) console.log(err.stack);

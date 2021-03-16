@@ -10,15 +10,9 @@ const mongoose = require('mongoose');
 
 const config = require('./config');
 
-const seedDir = process.env.SEED_DIR || 'seeds';
+const { seedDir } = config;
 
-mongoose.connect(config.db[process.env.CONN_MODE.toLowerCase()], {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  auth: { authSource: 'admin' },
-});
+mongoose.connect(config.db.connectionString[config.db.connectionMode], config.db.connectionOptions)
 
 mongoose.connection.on('connected', async () => {
   let files = [];

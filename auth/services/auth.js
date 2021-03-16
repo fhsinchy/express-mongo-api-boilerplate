@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const config = require('../../config');
+
 module.exports = class AuthService {
   constructor(User) {
     this.User = User;
@@ -40,11 +42,11 @@ module.exports = class AuthService {
         email: user.email,
       };
 
-      const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: process.env.NODE_ENV === 'development' ? '30d' : '5m',
+      const accessToken = jwt.sign(tokenPayload, config.auth.accessTokenSecret, {
+        expiresIn: config.auth.validity.accessToken,
       });
 
-      const refreshToken = jwt.sign(tokenPayload, process.env.REFRESH_TOKEN_SECRET);
+      const refreshToken = jwt.sign(tokenPayload, config.auth.refreshTokenSecret);
 
       return {
         accessToken,
@@ -58,7 +60,7 @@ module.exports = class AuthService {
   }
 
   static refresh(refreshToken) {
-    const user = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    const user = jwt.verify(refreshToken, config.auth.refreshTokenSecret);
 
     const tokenPayload = {
       id: user.id,
@@ -66,8 +68,8 @@ module.exports = class AuthService {
       email: user.email,
     };
 
-    const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: process.env.NODE_ENV === 'development' ? '30d' : '5m',
+    const accessToken = jwt.sign(tokenPayload, config.auth.accessTokenSecret, {
+      expiresIn: config.auth.validity.accessToken,
     });
 
     return { accessToken };

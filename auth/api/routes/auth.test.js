@@ -1,8 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-undef */
-
-require('dotenv').config();
 
 const request = require('supertest');
 const mongoose = require('mongoose');

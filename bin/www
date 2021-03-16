@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-require('dotenv').config();
+// require('dotenv').config();
 
 /**
  * Module dependencies.
@@ -16,8 +16,8 @@ const config = require('../config');
  * Get port from environment and store in Express.
  */
 
-const host = process.env.HOST || 'http://127.0.0.1';
-const port = process.env.PORT || 3000;
+const { host } = config;
+const { port } = config;
 app.set('port', port);
 
 /**
@@ -31,13 +31,7 @@ const server = http.createServer(app);
  */
 
 mongoose
-  .connect(config.db[process.env.CONN_MODE.toLowerCase()], {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    auth: { authSource: 'admin' },
-  })
+  .connect(config.db.connectionString[config.db.connectionMode], config.db.connectionOptions)
   // eslint-disable-next-line no-console
   .catch((err) => console.log(err));
 

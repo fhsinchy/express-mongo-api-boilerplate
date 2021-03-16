@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { celebrate, Joi } = require('celebrate');
 
 const { User } = require('../../models');
+const config = require('../../../config');
 const { AuthService } = require('../../services');
 const { authenticate } = require('../../middleware');
 
@@ -50,7 +51,7 @@ module.exports = (routes) => {
 
         res.cookie('refreshToken', refreshToken, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
+          secure: config.env === 'production',
           sameSite: true,
         });
 
