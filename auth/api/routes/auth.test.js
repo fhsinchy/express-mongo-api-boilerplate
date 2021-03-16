@@ -19,8 +19,6 @@ function extractCookie(response) {
 const mongo = new MongoMemoryServer();
 
 beforeAll(async () => {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
   const mongoUri = await mongo.getUri();
 
   await mongoose.connect(mongoUri, {
