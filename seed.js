@@ -1,16 +1,14 @@
+/* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
 /* eslint-disable import/no-dynamic-require */
-
-require('dotenv').config();
 
 const fs = require('fs').promises;
 const mongoose = require('mongoose');
 
 const config = require('./config');
 
-const { seedDir } = config;
+const { seedDir } = config.seeder;
 
 mongoose.connect(config.db.connectionString[config.db.connectionMode], config.db.connectionOptions)
 

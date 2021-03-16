@@ -83,7 +83,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   const status = isCelebrate(err) ? 400 : err.status || 500;
   const message =
-    config.env === 'production' && err.status === 500 ? 'Something Went Wrong!' : err.message;
+    config.app.env === 'production' && err.status === 500 ? 'Something Went Wrong!' : err.message;
 
   // eslint-disable-next-line no-console
   if (status === 500) console.log(err.stack);

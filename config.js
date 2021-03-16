@@ -1,10 +1,16 @@
 require('dotenv').config();
 
 module.exports = {
-  env: process.env.NODE_ENV || 'development',
-  host: process.env.HOST || 'http://127.0.0.1',
-  port: process.env.PORT || 3000,
-  seedDir: process.env.SEED_DIR || 'seeds',
+  app: {
+    env: process.env.NODE_ENV || 'development',
+    host: process.env.HOST || 'http://127.0.0.1',
+    port: process.env.PORT || 3000,
+  },
+
+  seeder: {
+    seedDir: process.env.SEED_DIR || 'seeds',
+  },
+
   db: {
     connectionMode: process.env.CONN_MODE,
     connectionString: {
@@ -19,6 +25,7 @@ module.exports = {
       auth: { authSource: process.env.AUTH_SOURCE },
     },
   },
+
   auth: {
     cookieSecret: process.env.COOKIE_SECRET,
     accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
@@ -26,6 +33,6 @@ module.exports = {
     validity: {
       accessToken: process.env.NODE_ENV === 'development' ? '30d' : '5m',
       refreshToken: process.env.NODE_ENV === 'development' ? '365d' : '7d',
-    }
+    },
   },
 };

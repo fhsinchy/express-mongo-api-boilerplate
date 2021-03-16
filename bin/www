@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-// require('dotenv').config();
-
 /**
  * Module dependencies.
  */
@@ -16,8 +14,8 @@ const config = require('../config');
  * Get port from environment and store in Express.
  */
 
-const { host } = config;
-const { port } = config;
+const { host } = config.app;
+const { port } = config.app;
 app.set('port', port);
 
 /**

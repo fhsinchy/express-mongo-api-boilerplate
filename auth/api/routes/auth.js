@@ -51,7 +51,7 @@ module.exports = (routes) => {
 
         res.cookie('refreshToken', refreshToken, {
           httpOnly: true,
-          secure: config.env === 'production',
+          secure: config.app.env === 'production',
           sameSite: true,
         });
 
