@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 
+require('dotenv').config();
+
 const request = require('supertest');
-const app = require('../../../app');
+const app = require('../../../../app');
 
 describe('GET /', () => {
   test('Responds with 200 status code and a message', async () => {
