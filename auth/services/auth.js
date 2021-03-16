@@ -21,7 +21,6 @@ module.exports = class AuthService {
       });
 
       return {
-        id: user.id,
         name: user.name,
         email: user.email,
       };
@@ -37,7 +36,6 @@ module.exports = class AuthService {
       throw err;
     } else if (await bcrypt.compare(params.password, user.password)) {
       const tokenPayload = {
-        id: user.id,
         name: user.name,
         email: user.email,
       };
@@ -63,7 +61,6 @@ module.exports = class AuthService {
     const user = jwt.verify(refreshToken, config.auth.refreshTokenSecret);
 
     const tokenPayload = {
-      id: user.id,
       name: user.name,
       email: user.email,
     };

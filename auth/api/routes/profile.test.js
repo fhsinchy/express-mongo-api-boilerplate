@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const request = require('supertest');
 
@@ -16,7 +15,6 @@ describe('GET /profile', () => {
 
   test('Responds with the profile of the currently authenticated user', async () => {
     const payload = {
-      id: mongoose.Types.ObjectId(),
       name: 'Farhan Hasin Chowdhury',
       email: 'mail@farhan.info',
     };
@@ -28,6 +26,6 @@ describe('GET /profile', () => {
     const response = await request(app).get('/profile').set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(200);
-    // expect(response.body.data.user).toEqual(payload);
+    expect(response.body.data.user).toEqual(payload);
   });
 });
