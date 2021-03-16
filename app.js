@@ -2,14 +2,15 @@
  * Module dependencies.
  */
 
-const { join } = require('path');
 const cors = require('cors');
+const { join } = require('path');
 const logger = require('morgan');
 const helmet = require('helmet');
+require('pkginfo')(module, 'name');
 const express = require('express');
+const rfs = require('rotating-file-stream');
 const { isCelebrate } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const rfs = require('rotating-file-stream');
 
 const authRoutes = require('./auth/api');
 
