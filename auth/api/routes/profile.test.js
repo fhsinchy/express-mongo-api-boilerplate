@@ -5,7 +5,7 @@ require('dotenv').config();
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
 mongoose = require('mongoose');
-const app = require('../../../../../app');
+const app = require('../../../app');
 
 describe('GET /profile', () => {
   test('Does not allow unauthorized access', async () => {

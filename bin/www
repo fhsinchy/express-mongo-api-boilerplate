@@ -7,7 +7,10 @@ require('dotenv').config();
  */
 
 const http = require('http');
+const mongoose = require('mongoose');
+
 const app = require('../app');
+const config = require('../config');
 
 /**
  * Get port from environment and store in Express.
@@ -22,6 +25,26 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+
+/**
+ * ODM initialization.
+ */
+
+mongoose
+  .connect(config.db[process.env.CONN_MODE.toLowerCase()], {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    auth: { authSource: 'admin' },
+  })
+  // eslint-disable-next-line no-console
+  .catch((err) => console.log(err));
+
+mongoose.connection.on('error', (err) => {
+  // eslint-disable-next-line no-console
+  console.log(err);
+});
 
 /**
  * Listen on provided port, on all network interfaces.

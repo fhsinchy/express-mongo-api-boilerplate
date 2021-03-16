@@ -7,34 +7,11 @@ const cors = require('cors');
 const logger = require('morgan');
 const helmet = require('helmet');
 const express = require('express');
-const mongoose = require('mongoose');
 const { isCelebrate } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const rfs = require('rotating-file-stream');
 
-const config = require('./config');
-
 const authRoutes = require('./auth/api');
-
-/**
- * ODM initialization.
- */
-
-mongoose
-  .connect(config.db[process.env.CONN_MODE.toLowerCase()], {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    auth: { authSource: 'admin' },
-  })
-  // eslint-disable-next-line no-console
-  .catch((err) => console.log(err));
-
-mongoose.connection.on('error', (err) => {
-  // eslint-disable-next-line no-console
-  console.log(err);
-});
 
 /**
  * app instance initialization.
