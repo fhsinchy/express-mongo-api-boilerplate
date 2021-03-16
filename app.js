@@ -1,0 +1,119 @@
+/**
+ * Module dependencies.
+ */
+
+const { join } = require('path');
+const cors = require('cors');
+const logger = require('morgan');
+const helmet = require('helmet');
+const express = require('express');
+const mongoose = require('mongoose');
+const { isCelebrate } = require('celebrate');
+const cookieParser = require('cookie-parser');
+const rfs = require('rotating-file-stream');
+
+const config = require('./config');
+
+const authRoutes = require('./auth/api');
+
+/**
+ * ODM initialization.
+ */
+
+mongoose
+  .connect(config.db[process.env.CONN_MODE.toLowerCase()], {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    auth: { authSource: 'admin' },
+  })
+  // eslint-disable-next-line no-console
+  .catch((err) => console.log(err));
+
+mongoose.connection.on('error', (err) => {
+  // eslint-disable-next-line no-console
+  console.log(err);
+});
+
+/**
+ * app instance initialization.
+ */
+
+const app = express();
+
+/**
+ * Middleware registration.
+ */
+
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(cookieParser());
+
+/**
+ * Logger setup.
+ */
+
+app.use(logger('common'));
+app.use(
+  logger('combined', {
+    stream: rfs.createStream(
+      `${module.exports.name}-${new Date()
+        .toISOString()
+        .replace(/T.*/, '')
+        .split('-')
+        .reverse()
+        .join('-')}.log`,
+      {
+        interval: '1d',
+        path: join(__dirname, 'log'),
+      },
+    ),
+  }),
+);
+
+/**
+ * Route registration.
+ */
+app.get('/', (req, res) => {
+  res.status(200).json({
+    error: false,
+    message: 'Bonjour, mon ami',
+  });
+});
+
+app.use('/', authRoutes);
+
+/**
+ * 404 handler.
+ */
+
+app.use((req, res, next) => {
+  const err = new Error('Not Found!');
+  err.status = 404;
+  next(err);
+});
+
+/**
+ * Error handler registration.
+ */
+
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  const status = isCelebrate(err) ? 400 : err.status || 500;
+  const message =
+    process.env.NODE_ENV === 'production' && err.status === 500
+      ? 'Something Went Wrong!'
+      : err.message;
+
+  // eslint-disable-next-line no-console
+  if (status === 500) console.log(err.stack);
+
+  res.status(status).json({
+    status: status >= 500 ? 'error' : 'fail',
+    message,
+  });
+});
+
+module.exports = app;
