@@ -10,7 +10,7 @@ const config = require('./config');
 
 const { seedDir } = config.seeder;
 
-mongoose.connect(config.db.connectionString[config.db.connectionMode], config.db.connectionOptions)
+mongoose.connect(config.db.connectionString[config.db.connectionMode], config.db.connectionOptions);
 
 mongoose.connection.on('connected', async () => {
   let files = [];
