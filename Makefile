@@ -16,3 +16,5 @@ destroy:
 	docker-compose down --volume
 list:
 	docker-compose ps
+lint:
+	docker-compose exec api npm run lint
