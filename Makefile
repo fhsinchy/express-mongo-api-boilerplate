@@ -6,6 +6,8 @@ seed:
 	docker-compose exec api npm run seed
 shell:
 	docker-compose exec api bash
+logs:
+	docker-compose logs --follow api
 test:
 	docker-compose exec api npm run test
 stop:
