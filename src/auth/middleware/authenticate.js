@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   const token = authHeader.split(' ')[1];
 
   try {
-    const user = jwt.verify(token, config.auth.accessTokenSecret);
+    const user = jwt.verify(token, config.auth.accessToken.secret);
     req.user = user;
     next();
   } catch (error) {

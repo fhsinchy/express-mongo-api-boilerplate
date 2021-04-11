@@ -19,8 +19,8 @@ describe('GET /profile', () => {
       email: 'mail@farhan.info',
     };
 
-    const token = jwt.sign(payload, config.auth.accessTokenSecret, {
-      expiresIn: config.auth.validity.accessToken,
+    const token = jwt.sign(payload, config.auth.accessToken.secret, {
+      expiresIn: config.auth.accessToken.validity,
     });
 
     const response = await request(app).get('/profile').set('Authorization', `Bearer ${token}`);

@@ -49,11 +49,7 @@ module.exports = (routes) => {
       try {
         const { accessToken, refreshToken } = await authService.login(req.body);
 
-        res.cookie('refreshToken', refreshToken, {
-          httpOnly: true,
-          secure: config.app.env === 'production',
-          sameSite: true,
-        });
+        res.cookie('refreshToken', refreshToken, config.auth.refreshToken.cookie.options);
 
         res.status(200).json({
           status: 'success',

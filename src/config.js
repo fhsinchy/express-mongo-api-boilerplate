@@ -1,5 +1,8 @@
 require('dotenv').config();
 
+const oneYearInSeconds = 8760 * 60 * 60;
+const oneWeekInSeconds = 168 * 60 * 60;
+
 module.exports = {
   app: {
     env: process.env.NODE_ENV || 'development',
@@ -27,12 +30,23 @@ module.exports = {
   },
 
   auth: {
-    cookieSecret: process.env.COOKIE_SECRET,
-    accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
-    refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
-    validity: {
-      accessToken: process.env.NODE_ENV === 'development' ? '30d' : '5m',
-      refreshToken: process.env.NODE_ENV === 'development' ? '365d' : '7d',
+    accessToken: {
+      secret: process.env.ACCESS_TOKEN_SECRET,
+      validity: process.env.NODE_ENV === 'development' ? '30d' : '5m',
+    },
+    refreshToken: {
+      secret: process.env.REFRESH_TOKEN_SECRET,
+      validity: process.env.NODE_ENV === 'development' ? '365d' : '7d',
+      cookie: {
+        secret: process.env.COOKIE_SECRET,
+        options: {
+          httpOnly: true,
+          sameSite: 'Strict',
+          domain: process.env.HOST,
+          secure: process.env.NODE_ENV !== 'development',
+          maxAge: process.env.NODE_ENV === 'development' ? oneYearInSeconds : oneWeekInSeconds,
+        }
+      },
     },
   },
 };
