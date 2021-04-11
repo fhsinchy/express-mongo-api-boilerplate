@@ -26,7 +26,7 @@ const app = express();
  * Middleware registration.
  */
 
-app.use(cors());
+app.use(cors(config.cors));
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
