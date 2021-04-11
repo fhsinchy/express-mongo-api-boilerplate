@@ -14,8 +14,6 @@ const cookieParser = require('cookie-parser');
 
 const config = require('./config');
 
-const authRoutes = require('./auth/api');
-
 /**
  * app instance initialization.
  */
@@ -56,14 +54,7 @@ app.use(
 /**
  * Route registration.
  */
-app.get('/', (req, res) => {
-  res.status(200).json({
-    error: false,
-    message: 'Bonjour, mon ami',
-  });
-});
-
-app.use('/', authRoutes);
+require('./routes')(app);
 
 /**
  * 404 handler.
