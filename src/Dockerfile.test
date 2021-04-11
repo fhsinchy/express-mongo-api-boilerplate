@@ -1,0 +1,20 @@
+FROM node:latest
+
+ENV NODE_ENV=test
+ENV COOKIE_SECRET=secret
+ENV ACCESS_TOKEN_SECRET=secret
+ENV REFRESH_TOKEN_SECRET=secret
+
+# update npm to the latest minor version
+RUN npm install -g npm
+
+USER node
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+COPY ./package.json .
+RUN npm install
+
+COPY . .
+
+CMD [ "./node_modules/.bin/jest" ]

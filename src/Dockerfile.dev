@@ -1,0 +1,17 @@
+FROM node:latest
+
+ENV NODE_ENV=development
+
+# update npm to the latest minor version
+RUN npm install -g npm
+
+USER node
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+COPY ./package.json .
+RUN npm install
+
+COPY . .
+
+CMD [ "./node_modules/.bin/nodemon", "--config", "nodemon.json", "bin/www" ]
