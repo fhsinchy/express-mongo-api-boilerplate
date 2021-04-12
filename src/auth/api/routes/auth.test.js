@@ -50,6 +50,8 @@ describe('POST /auth/register', () => {
     const response = await request(app).post('/auth/register').send(user);
 
     expect(response.status).toBe(201);
+    expect(response.body.data.user).toHaveProperty('name', user.name);
+    expect(response.body.data.user).toHaveProperty('email', user.email);
   });
 });
 
