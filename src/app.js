@@ -54,6 +54,7 @@ app.use(
 /**
  * Route registration.
  */
+
 require('./routes')(app);
 
 /**
