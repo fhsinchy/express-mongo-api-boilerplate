@@ -29,7 +29,7 @@ const server = http.createServer(app);
  */
 
 mongoose
-  .connect(config.db.connectionString[config.db.connectionMode], config.db.connectionOptions)
+  .connect(config.db.connectionString, config.db.connectionOptions)
   // eslint-disable-next-line no-console
   .catch((err) => console.log(err));
 

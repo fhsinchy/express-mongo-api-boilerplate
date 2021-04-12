@@ -37,7 +37,7 @@ services:
             DB_USER: ${DB_USER}
             DB_PASSWORD: ${DB_PASSWORD}
             AUTH_SOURCE: ${AUTH_SOURCE}
-            CONN_MODE: ${CONN_MODE}
+            CONNECTION_MODE: ${CONNECTION_MODE}
 
             COOKIE_SECRET: ${COOKIE_SECRET}
             ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
