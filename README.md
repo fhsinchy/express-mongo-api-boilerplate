@@ -2,7 +2,7 @@
 
 This is a battle tested application architecture that I've been using for a while now on medium to large projects at work. Although not perfect, so far it has proved itself to be a reliable, scalable and manageable project architecture.
 
-I've also tried to comply with many popular Node.js Best Practices as long as they were within my limits. There are some best practices that I left off intentionally such as the usage of Node.js specific plugins for ESLint. I've been using the amazing [airbnb/javascript](https://github.com/airbnb/javascript) plugin for all my projects and I'm happy with it. Another practice that I avoid is wrapping common utilities in a separate package. Well I do opt-in for a separate package when I have large number of shared utilities but for simple stuff like the `authenticate` or `authorize` middleware, I stick with simple `require()` statements.
+I've also tried to comply with many popular Node.js best practices as long as they were within my limits. There are some best practices that I left off intentionally such as the usage of Node.js specific plugins for ESLint. I've been using the amazing [airbnb/javascript](https://github.com/airbnb/javascript) plugin for all my projects and I'm happy with it. Another practice that I avoid is wrapping common utilities in a separate package. Well I do opt-in for a separate package when I have large number of shared utilities but for simple stuff like the `authenticate` or `authorize` middleware, I stick with simple `require()` statements.
 
 There are some other best practices that I haven't yet picked up but will soon. Such as the practice of tagged tests, higher test coverage or testing my middleware in isolation. Also the production oriented best practices have been left off of this project but we do follow the common best practices at work when actually putting someting in production.
 
@@ -71,4 +71,4 @@ There are some other best practices that I haven't yet picked up but will soon. 
     - [x] Generic Docker practices
     - [ ] Lint your Dockerfile
 
-If you wish to learn more about this architecture and how you may extend this according to your needs, checkout my blog post on [https://farhan.info](https://farhan.info) and as usual, quality contributions are welcomed.
+If you wish to learn more about this architecture and how you may use or extend this project according to your needs, checkout my blog post on [https://farhan.info](https://farhan.info) and as usual, quality contributions are welcomed.
