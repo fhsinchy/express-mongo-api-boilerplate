@@ -1,4 +1,4 @@
-# Solid Express Application Architecture
+# Rock Solid Express Application Architecture
 
 This is a battle tested application architecture that I've been using for a while now on medium to large projects at work. Although not perfect, so far it has proved itself to be a reliable, scalable and manageable project architecture.
 
@@ -67,7 +67,7 @@ There are some other best practices that I haven't yet picked up but will soon. 
     - [x] Prefer smaller Docker base images
     - [x] Clean-out build-time secrets, avoid secrets in args
     - [ ] Scan images for multi layers of vulnerabilities
-    - [ ] Clean NODE_MODULE cache
+    - [ ] Clean `NODE_MODULE` cache
     - [x] Generic Docker practices
     - [ ] Lint your Dockerfile
 
