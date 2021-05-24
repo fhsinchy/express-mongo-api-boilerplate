@@ -1,5 +1,5 @@
 const extractArray = (commaDelimitedString) =>
-  commaDelimitedString ? commaDelimitedString.split() : false;
+  commaDelimitedString ? commaDelimitedString.split(',') : false;
 
 module.exports = {
   origin:
