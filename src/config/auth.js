@@ -8,16 +8,16 @@ const hoursToSeconds = (hours) => hours * 60 * 60;
 module.exports = {
   accessToken: {
     secret: process.env.ACCESS_TOKEN_SECRET,
-    validity: nodeEnv === 'development' ? '30d' : '5m',
+    validity: nodeEnv === 'development' ? '30 days' : '5m',
   },
   refreshToken: {
     secret: process.env.REFRESH_TOKEN_SECRET,
-    validity: nodeEnv === 'development' ? '365d' : '7d',
+    validity: nodeEnv === 'development' ? '365 days' : '7 days',
     cookie: {
       secret: process.env.COOKIE_SECRET,
       options: {
         httpOnly: true,
-        sameSite: nodeEnv === 'production' ? 'Strict' : 'None',
+        sameSite: nodeEnv === 'development' ? 'None' : 'Strict',
         domain: process.env.HOST,
         secure: nodeEnv !== 'development',
         maxAge:
