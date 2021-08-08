@@ -71,4 +71,4 @@ There are some other best practices that I haven't yet picked up but will soon. 
   - [x] Generic Docker practices
   - [ ] Lint your Dockerfile
 
-If you wish to learn more about this architecture and how you may use or extend this project according to your needs, checkout my [blog post](https://farhan.info/rock-solid-express-application-architecture) on [https://farhan.info](https://farhan.info) and as usual, quality contributions are welcomed.
+If you wish to learn more about this architecture and how you may use or extend this project according to your needs, checkout my [blog post](https://blog.farhan.dev/rock-solid-express-application-architecture) on [https://blog.farhan.dev](https://blog.farhan.dev) and as usual, quality contributions are welcomed.
