@@ -11,7 +11,7 @@
     "seed": "node seed"
   },
   "keywords": [],
-  "author": "Farhan Hasin Chowdhury <mail@farhan.info>",
+  "author": "Farhan Hasin Chowdhury <shovik.is.here@gmail.com>",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/fhsinchy/express-mongo-api-boilerplate"
